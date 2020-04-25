@@ -58,57 +58,71 @@ bot.onText(/\/isMeAdmin/, function (msg, match) {
 bot.on('message', msg => {
   let userId = msg.chat.id
   let isWaiting = isWaitingforMessage.find(item => item.userId === userId)
+  let lang = config.userOptionsData.find(i => i.userId == userId)
   if (!isWaiting) {
     switch (msg.text) {
       case '/start':
         functions.start(bot, msg)
         break;
-
-      case keyboard_btns.main.offer:
-        functions.offer(bot, msg)
+      
+      case keyboard_btns.lang.rus:
+        config.userOptionsData.splice(config.userOptionsData.findIndex(i => i.userId == userId), 1)
+        config.userOptions({userId, lang: 'rus'})
+        functions.langChoose(bot, msg, config.userOptionsData.find(i => i.userId == userId).lang)
         break;
 
-      case keyboard_btns.main.report:
-        functions.report(bot, msg)
+      case keyboard_btns.lang.kz:
+        config.userOptionsData.splice(config.userOptionsData.findIndex(i => i.userId == userId), 1)
+        config.userOptions({ userId, lang: 'kz' })
+        console.log(config.userOptionsData.find(i => i.userId == userId).lang)
+        functions.langChoose(bot, msg, config.userOptionsData.find(i => i.userId == userId).lang)
+        break;
+
+      case keyboard_btns.main[lang].offer:
+        functions.offer(bot, msg, lang)
+        break;
+
+      case keyboard_btns.main[lang].report:
+        functions.report(bot, msg, lang)
         break;
       
-      case keyboard_btns.main.info:
-        functions.info(bot, msg)
+      case keyboard_btns.main[lang].info:
+        functions.info(bot, msg, lang)
         break;
 
-      case keyboard_btns.main.communication:
-        functions.communication(bot, msg)
+      case keyboard_btns.main[lang].communication:
+        functions.communication(bot, msg, lang)
         break;
 
-      case keyboard_btns.common.back:
-        functions.back(bot, msg)
+      case keyboard_btns.common[lang].back:
+        functions.back(bot, msg, lang)
         break;
 
-      case keyboard_btns.offer.toMessage:
+      case keyboard_btns.offer[lang].toMessage:
         isWaitingforMessage.push({
           userId: userId,
           isWaiting: true,
           waitingFor: 'offer'
         })
-        functions.toMessage_offer(bot, msg)
+        functions.toMessage_offer(bot, msg, lang)
         break;
 
-      case keyboard_btns.report.toMessage:
+      case keyboard_btns.report[lang].toMessage:
         isWaitingforMessage.push({
           userId: userId,
           isWaiting: true,
           waitingFor: 'report'
         })
-        functions.toMessage_report(bot, msg)
+        functions.toMessage_report(bot, msg, lang)
         break;
 
-      case keyboard_btns.communication.toMessage:
+      case keyboard_btns.communication[lang].toMessage:
         isWaitingforMessage.push({
           userId: userId,
           isWaiting: true,
           waitingFor: 'communication'
         })
-        functions.toMessage_communication(bot, msg)
+        functions.toMessage_communication(bot, msg, lang)
         break;
 
 
@@ -117,13 +131,13 @@ bot.on('message', msg => {
     }
   } else if (isWaiting.isWaiting){
     if (isWaiting.waitingFor === 'offer') {
-      functions.HANDLER_OFFER(bot, msg)
+      functions.HANDLER_OFFER(bot, msg, lang)
     } else if (isWaiting.waitingFor === 'report') {
-      functions.HANDLER_REPORT(bot, msg)
+      functions.HANDLER_REPORT(bot, msg, lang)
     } else if (isWaiting.waitingFor === 'communication') {
-      functions.HANDLER_COMMUNICATION(bot, msg)
+      functions.HANDLER_COMMUNICATION(bot, msg, lang)
     } else if (isWaiting.waitingFor === 'answer') {
-      functions.HANDLER_ADMIN_ANSWER(bot, msg, isWaiting)
+      functions.HANDLER_ADMIN_ANSWER(bot, msg, isWaiting, lang)
     }
     isWaitingforMessage.splice(isWaitingforMessage.findIndex(item => item.userId === userId), 1)
   }
