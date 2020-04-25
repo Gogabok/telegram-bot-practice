@@ -25,9 +25,15 @@ bot.onText(/\/answer_(.+)/, function (msg, match) {
 })
 
 bot.onText(/\/regMeAsAdmin_(.+)/, function (msg, match) {
+  let admins = config.adminsID
+  let isAdmin = admins.find(id => id == msg.chat.id)
   if (match[1] == config.token) {
-    config.addAdmin(msg.chat.id)
-    bot.sendMessage(msg.chat.id, 'Успешно! Теперь вам будут поступать заявки пользователей.')
+    if(!isAdmin) {
+      config.addAdmin(msg.chat.id)
+      bot.sendMessage(msg.chat.id, 'Успешно! Теперь вам будут поступать заявки пользователей.')
+    } else {
+      bot.sendMessage(msg.chat.id, 'Ошибка. Вы уже являетесь администратором')
+    }
   } else {
     bot.sendMessage(msg.chat.id, 'Ошибка. Попробуйте снова.')
   }
@@ -45,6 +51,7 @@ bot.onText(/\/removeMeAsAdmin/, function (msg, match) {
 })
 
 bot.onText(/\/isMeAdmin/, function (msg, match) {
+  console.log(1)
   let admins = config.adminsID
   let isAdmin = admins.find(id => id == msg.chat.id)
   if (isAdmin) {
@@ -58,7 +65,8 @@ bot.onText(/\/isMeAdmin/, function (msg, match) {
 bot.on('message', msg => {
   let userId = msg.chat.id
   let isWaiting = isWaitingforMessage.find(item => item.userId === userId)
-  let lang = config.userOptionsData.find(i => i.userId == userId)
+  let userOptions = config.userOptionsData.find(i => i.userId == userId)
+  let lang = userOptions ? userOptions.lang : null
   if (!isWaiting) {
     switch (msg.text) {
       case '/start':
@@ -74,7 +82,6 @@ bot.on('message', msg => {
       case keyboard_btns.lang.kz:
         config.userOptionsData.splice(config.userOptionsData.findIndex(i => i.userId == userId), 1)
         config.userOptions({ userId, lang: 'kz' })
-        console.log(config.userOptionsData.find(i => i.userId == userId).lang)
         functions.langChoose(bot, msg, config.userOptionsData.find(i => i.userId == userId).lang)
         break;
 
