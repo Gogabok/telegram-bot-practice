@@ -8,6 +8,8 @@ const bot = new TelegramBot(config.token, {
   polling: true
 })
 
+config.init()
+
 let isWaitingforMessage = []
 
 bot.onText(/\/answer_(.+)/, function (msg, match) {
@@ -51,7 +53,6 @@ bot.onText(/\/removeMeAsAdmin/, function (msg, match) {
 })
 
 bot.onText(/\/isMeAdmin/, function (msg, match) {
-  console.log(1)
   let admins = config.adminsID
   let isAdmin = admins.find(id => id == msg.chat.id)
   if (isAdmin) {
@@ -67,6 +68,9 @@ bot.on('message', msg => {
   let isWaiting = isWaitingforMessage.find(item => item.userId === userId)
   let userOptions = config.userOptionsData.find(i => i.userId == userId)
   let lang = userOptions ? userOptions.lang : null
+  if (lang === null && msg.text !== 'Русский' && msg.text !== 'Казақша') {
+    functions.start(bot, msg)
+  }
   if (!isWaiting) {
     switch (msg.text) {
       case '/start':
