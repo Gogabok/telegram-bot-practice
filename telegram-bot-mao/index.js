@@ -41,7 +41,7 @@ bot.onText(/\/regMeAsAdmin_(.+)/, function (msg, match) {
   }
 })
 
-bot.onText(/\/removeMeAsAdmin/, function (msg, match) {
+bot.onText(/\/removeMeAsAdmin/, function (msg) {
   let admins = config.adminsID
   let isAdmin = admins.find(id => id == msg.chat.id)
   if (isAdmin) {
@@ -52,7 +52,7 @@ bot.onText(/\/removeMeAsAdmin/, function (msg, match) {
   }
 })
 
-bot.onText(/\/isMeAdmin/, function (msg, match) {
+bot.onText(/\/isMeAdmin/, function (msg) {
   let admins = config.adminsID
   let isAdmin = admins.find(id => id == msg.chat.id)
   if (isAdmin) {

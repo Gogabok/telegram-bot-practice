@@ -28,8 +28,8 @@ module.exports = {
       if (err) {
         return
       }
-      let admins = JSON.parse(data)
-      this.userOptionsData = admins
+      let users = JSON.parse(data)
+      this.userOptionsData = users
     })
   },
   updateFile() {
