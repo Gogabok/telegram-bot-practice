@@ -13,6 +13,7 @@ module.exports = {
   },
   userOptions(user) {
     this.userOptionsData.push(user)
+    console.log(this.userOptionsData)
     this.updateUsersSettings()
   },
   init() {
@@ -27,9 +28,12 @@ module.exports = {
     fs.readFile('usersLogs.txt', 'utf-8', (err, data) => {
       if (err) {
         return
+      } else {
+        if(data !== '') {
+          let users = JSON.parse(data)
+          this.userOptionsData = users
+        }
       }
-      let users = JSON.parse(data)
-      this.userOptionsData = users
     })
   },
   updateFile() {

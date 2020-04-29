@@ -78,13 +78,21 @@ bot.on('message', msg => {
         break;
       
       case keyboard_btns.lang.rus:
-        config.userOptionsData.splice(config.userOptionsData.findIndex(i => i.userId == userId), 1)
+        let usersSettings = config.userOptionsData.find(i => i.userId === userId)
+        if (usersSettings) {
+          let idx = config.userOptionsData.findIndex(i => i === usersSettings)
+          config.userOptionsData.splice(idx, 1)
+        }
         config.userOptions({userId, lang: 'rus'})
         functions.langChoose(bot, msg, config.userOptionsData.find(i => i.userId == userId).lang)
         break;
 
       case keyboard_btns.lang.kz:
-        config.userOptionsData.splice(config.userOptionsData.findIndex(i => i.userId == userId), 1)
+        let usersSettings2 = config.userOptionsData.find(i => i.userId === userId)
+        if (usersSettings2) {
+          let idx = config.userOptionsData.findIndex(i => i === usersSettings2)
+          config.userOptionsData.splice(idx, 1)
+        }
         config.userOptions({ userId, lang: 'kz' })
         functions.langChoose(bot, msg, config.userOptionsData.find(i => i.userId == userId).lang)
         break;
