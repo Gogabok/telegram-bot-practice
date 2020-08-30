@@ -106,6 +106,11 @@ bot.on('message', msg => {
         break;
       
       case keyboard_btns.main[lang].info:
+        isWaitingforMessage.push({
+          userId: userId,
+          isWaiting: true,
+          waitingFor: 'info'
+        })
         functions.info(bot, msg, lang)
         break;
 
@@ -157,6 +162,8 @@ bot.on('message', msg => {
       functions.HANDLER_COMMUNICATION(bot, msg, lang)
     } else if (isWaiting.waitingFor === 'answer') {
       functions.HANDLER_ADMIN_ANSWER(bot, msg, isWaiting, lang)
+    } else if (isWaiting.waitingFor === 'info') {
+      functions.HANDLER_INFO(bot, msg, lang)
     }
     isWaitingforMessage.splice(isWaitingforMessage.findIndex(item => item.userId === userId), 1)
   }

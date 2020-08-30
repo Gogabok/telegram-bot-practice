@@ -1,6 +1,7 @@
 const kb = require("./keyboards")
 const keyboard_btns = require('./keyboard-buttons')
 const config = require('./config')
+const converter = require('./xlsxConverter')
 
 const functions = {
   start: (bot, msg) => {
@@ -46,9 +47,9 @@ const functions = {
   info: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Справочная информация:\n1. Справочная информация 1.\n2. Справочная информация 2.\n3. Справочная информация 3.\n4. Справочная информация 4.\n5. Справочная информация 5.`
+      text = `Пожалуйста, введите наименование услуги`
     } else {
-      text = `Анықтамалық ақпарат:\n1. Анықтамалық ақпарат 1.\n2. Анықтамалық ақпарат 2.\n3. Анықтамалық ақпарат 3.\n4. Анықтамалық ақпарат 4.\n5. Анықтамалық ақпарат 5.`
+      text = ``
     }
     bot.sendMessage(msg.chat.id, text)
   },
@@ -194,6 +195,9 @@ const functions = {
   },
   HANDLER_ADMIN_ANSWER: (bot, msg, data, lang) => {
     bot.sendMessage(data.forUser, msg.text)
+  },
+  HANDLER_INFO: (bot, msg, data, lang) => {
+    converter(123)
   }
 }
 

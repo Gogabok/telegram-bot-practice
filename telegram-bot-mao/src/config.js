@@ -1,6 +1,6 @@
 const fs = require('fs')
 module.exports = {
-  token: '1179736799:AAEFTs0-vGbMubitGPa8l4YmafLP_qzUaZ4',
+  token: '1313461531:AAGTPq8p1LZhVhQ1IVkL3KaeybqH9ru5PDo',
   adminsID: [],
   userOptionsData: [],
   addAdmin: function (userId) {
