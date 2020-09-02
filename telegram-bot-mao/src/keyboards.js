@@ -4,7 +4,7 @@ module.exports = {
     main: [
       [btns.main.rus.offer, btns.main.rus.report],
       [btns.main.rus.communication],
-      [btns.main.rus.info]
+      [btns.main.rus.info, btns.main.rus.press]
     ],
     offer: [
       [btns.offer.rus.toMessage],
@@ -18,12 +18,15 @@ module.exports = {
       [btns.communication.rus.toMessage],
       [btns.common.rus.back]
     ],
+    press: [
+      [btns.common.rus.back]
+    ],
   },
   kz: {
     main: [
       [btns.main.kz.offer, btns.main.kz.report],
       [btns.main.kz.communication],
-      [btns.main.kz.info]
+      [btns.main.kz.info, btns.main.kz.press]
     ],
     offer: [
       [btns.offer.kz.toMessage],
@@ -35,6 +38,9 @@ module.exports = {
     ],
     communication: [
       [btns.communication.kz.toMessage],
+      [btns.common.kz.back]
+    ],
+    press: [
       [btns.common.kz.back]
     ],
   },

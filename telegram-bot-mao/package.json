@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "exceljs": "^4.1.1",
     "node-telegram-bot-api": "^0.40.0",
+    "node-xlsx": "^0.15.0",
     "nodemon": "^2.0.3",
+    "underscore": "^1.11.0",
+    "xlsx": "^0.16.6",
     "xlsx-populate": "^1.21.0",
     "xlsx-style": "^0.8.13"
   }

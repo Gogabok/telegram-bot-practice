@@ -2,6 +2,8 @@ const kb = require("./keyboards")
 const keyboard_btns = require('./keyboard-buttons')
 const config = require('./config')
 const converter = require('./xlsxConverter')
+// const xlsx = require('xlsx-populate');
+// const _ = require('underscore');
 
 const functions = {
   start: (bot, msg) => {
@@ -16,7 +18,7 @@ const functions = {
   langChoose(bot, msg, lang) {
     let text = null
     if (lang === 'rus') {
-      text = `Здравствуйте, ${msg.chat.first_name}. Я бот Министерства Сельского хозяйства РК, который поможет вам. Пожалуйста, выберите интересующий вас пункт:`
+      text = `Здравствуйте, ${msg.chat.first_name}. Я бот Министерства Сельского хозяйства РК, который поможет Вам. Пожалуйста, выберите интересующий Вас пункт:`
     } else {
       text = `Сәлеметсіз бе, ${msg.chat.first_name}. Мен Сізге көмек көрсететін ҚР Ауыл шаруашылығы министрлігінің боты. Қажетті мәселеңізді таңдауыңызды өтінем:`
     }
@@ -30,14 +32,30 @@ const functions = {
   },
   offer: (bot, msg, lang) => {
     let text = null
-    if(lang === 'rus') {
-      text = `Отлично! Вы можете написать нам предложение по почте: muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам ваше предложение прямо сюда!`
+    if (lang === 'rus') {
+      text = `Отлично! Вы можете написать нам предложение по почте: muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам Ваше предложение прямо сюда!`
     } else {
       text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы muratova.a@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.offer[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
         keyboard: kb[lang].offer,
+        one_time_keyboard: true,
+        resize_keyboard: true
+      },
+      parse_mode: 'HTML'
+    })
+  },
+  press: (bot, msg, lang) => {
+    let text = null
+    if (lang === 'rus') {
+      text = `<b>Наши контакты:</b> \nПочта: test@test.com \nТелефон: 89999999999`
+    } else {
+      text = `<b>Наши контакты:</b> \nПочта: test@test.com \nТелефон: 89999999999`
+    }
+    bot.sendMessage(msg.chat.id, text, {
+      reply_markup: {
+        keyboard: kb[lang].press,
         one_time_keyboard: true,
         resize_keyboard: true
       },
@@ -73,7 +91,7 @@ const functions = {
   report: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете написать нам вашу жалобу по почте muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам вашу жалобу прямо сюда!`
+      text = `Отлично! Вы можете написать нам вашу жалобу по почте muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам Вашу жалобу прямо сюда!`
     } else {
       text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы muratova.a@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.report[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
@@ -115,7 +133,7 @@ const functions = {
   toMessage_report: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = 'Пожалуйста, введите вашу жалобу:'
+      text = 'Пожалуйста, введите Вашу жалобу:'
     } else {
       text = `Сіздің шағым енгізіңіз:`
     }
@@ -124,7 +142,7 @@ const functions = {
   toMessage_communication: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = 'Пожалуйста, введите ваше сообщение:'
+      text = 'Пожалуйста, введите Ваше сообщение:'
     } else {
       text = `Хабарыңызды енгізіңіз:`
     }
@@ -139,7 +157,7 @@ const functions = {
     }
     let text = null
     if (lang === 'rus') {
-      text = 'Спасибо, ваше предложение принято и будет рассмотрено Министерством сельского хозяйства РК для улучшения качества государственных услуг! Напоминаем, что в соответствии с действующим законодательством Республики Казахстан, Ваше предложение, направленное посредством социальных мессенджеров, не является обращением и не имеет конкретных сроков рассмотрения.'
+      text = 'Спасибо, Ваше предложение принято и будет рассмотрено Министерством сельского хозяйства РК для улучшения качества государственных услуг! Напоминаем, что в соответствии с действующим законодательством Республики Казахстан, Ваше предложение, направленное посредством социальных мессенджеров, не является обращением и не имеет конкретных сроков рассмотрения.'
     } else {
       text = 'Рахмет, Cіздің ұсынысыңыз ҚР Ауыл шаруашылығы министрлігімен қабылданды және Мемлекеттік қызмет көрсету сапасын арттыру үшін қарастырылады. Естеріңізге сала кетейік, қолданыстағы заңнамаға сәйкес, Қазақстан Республикасының Сіздің әлеуметтік мессенджер арқылы жолдаған ұсыныстарыңыз өтініш болып табылмайды және нақты бекітілген қарастыру мерзімдері жоқ.'
     }
@@ -196,8 +214,24 @@ const functions = {
   HANDLER_ADMIN_ANSWER: (bot, msg, data, lang) => {
     bot.sendMessage(data.forUser, msg.text)
   },
-  HANDLER_INFO: (bot, msg, data, lang) => {
-    converter(123)
+  HANDLER_INFO: async function (bot, msg, lang) {
+    const filename = `/info_${lang}.xlsx`
+    const results = await converter(filename, msg)
+    console.log(results)
+    if (results.length > 0) {
+      for (let i = 0; i < results.length; i++) {
+        if (results[i] !== undefined) {
+          bot.sendMessage(msg.chat.id, `<b>Возможно, Вас интересует данная услуга:</b> \n${results[i].title}\n ${results[i].values.map(item => item ? `\n${item}` : '')}`, {
+            parse_mode: "HTML"
+          })
+        }
+      }
+    } else {
+      bot.sendMessage(msg.chat.id, `<b>К сожалению, таких услуг не найдено</b>`, {
+        parse_mode: "HTML"
+      })
+    }
+
   }
 }
 

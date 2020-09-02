@@ -149,6 +149,10 @@ bot.on('message', msg => {
         functions.toMessage_communication(bot, msg, lang)
         break;
 
+      case keyboard_btns.main[lang].press:
+        functions.press(bot, msg, lang)
+        break;
+
 
       default:
         break;
