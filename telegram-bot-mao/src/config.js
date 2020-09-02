@@ -13,7 +13,6 @@ module.exports = {
   },
   userOptions(user) {
     this.userOptionsData.push(user)
-    console.log(this.userOptionsData)
     this.updateUsersSettings()
   },
   init() {

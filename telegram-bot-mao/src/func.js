@@ -2,8 +2,6 @@ const kb = require("./keyboards")
 const keyboard_btns = require('./keyboard-buttons')
 const config = require('./config')
 const converter = require('./xlsxConverter')
-// const xlsx = require('xlsx-populate');
-// const _ = require('underscore');
 
 const functions = {
   start: (bot, msg) => {
@@ -217,7 +215,6 @@ const functions = {
   HANDLER_INFO: async function (bot, msg, lang) {
     const filename = `/info_${lang}.xlsx`
     const results = await converter(filename, msg)
-    console.log(results)
     if (results.length > 0) {
       for (let i = 0; i < results.length; i++) {
         if (results[i] !== undefined) {
