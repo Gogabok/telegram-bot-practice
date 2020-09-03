@@ -47,7 +47,7 @@ const functions = {
   press: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `<b>Наши контакты:</b> \nПочта: test@test.com \nТелефон: 89999999999`
+      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:30`
     } else {
       text = `<b>Наши контакты:</b> \nПочта: test@test.com \nТелефон: 89999999999`
     }

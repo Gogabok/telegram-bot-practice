@@ -2,7 +2,7 @@ const xlsx = require('xlsx-populate');
 
 const XLSXConverter = async function (filename, msg) {
   const titles = []
-  const message = [msg.text]
+  const message = [msg.text.toLowerCase()]
   await xlsx.fromFileAsync(__dirname + filename).then(wb => {
     const cells = wb.sheet(0).usedRange().value()
     for (let i = 1; i < cells.length; i++) {
@@ -18,7 +18,7 @@ const XLSXConverter = async function (filename, msg) {
       })
     }
   })
-  return titles.filter(source => message.some(substring => source.title.includes(substring)));
+  return titles.filter(source => message.some(substring => source.title.toLowerCase().includes(substring)));
 }
 
 
