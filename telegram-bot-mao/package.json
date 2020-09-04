@@ -12,6 +12,6 @@
   "dependencies": {
     "node-telegram-bot-api": "^0.40.0",
     "nodemon": "^2.0.3",
-    "xlsx-populate": "^1.21.0",
+    "xlsx-populate": "^1.21.0"
   }
 }

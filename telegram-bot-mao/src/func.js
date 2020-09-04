@@ -49,7 +49,7 @@ const functions = {
     if (lang === 'rus') {
       text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:30`
     } else {
-      text = `<b>Наши контакты:</b> \nПочта: test@test.com \nТелефон: 89999999999`
+      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:30`
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
@@ -219,13 +219,21 @@ const functions = {
       for (let i = 0; i < results.length; i++) {
         if (results[i] !== undefined) {
           bot.sendMessage(msg.chat.id, `<b>Возможно, Вас интересует данная услуга:</b> \n${results[i].title}\n ${results[i].values.map(item => item ? `\n${item}` : '')}`, {
-            parse_mode: "HTML"
+            parse_mode: "HTML",
+            reply_markup: {
+			  keyboard: kb[lang].main,
+			  resize_keyboard: true
+			},
           })
         }
       }
     } else {
       bot.sendMessage(msg.chat.id, `<b>К сожалению, таких услуг не найдено</b>`, {
-        parse_mode: "HTML"
+        parse_mode: "HTML",
+        reply_markup: {
+		  keyboard: kb[lang].main,
+		  resize_keyboard: true
+		},
       })
     }
 
