@@ -1,5 +1,8 @@
 const btns = require("./keyboard-buttons")
+const config = require("./config")
 module.exports = {
+  info_GROUPS: config.infoKeyboardsGroups,
+  info_TITLES: config.valuesByGroup,
   rus: {
     main: [
       [btns.main.rus.offer, btns.main.rus.report],
@@ -20,7 +23,7 @@ module.exports = {
     ],
     press: [
       [btns.common.rus.back]
-    ],
+    ]
   },
   kz: {
     main: [

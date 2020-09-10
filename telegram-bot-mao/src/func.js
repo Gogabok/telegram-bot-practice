@@ -2,6 +2,7 @@ const kb = require("./keyboards")
 const keyboard_btns = require('./keyboard-buttons')
 const config = require('./config')
 const converter = require('./xlsxConverter')
+const request = require('request');
 
 const functions = {
   start: (bot, msg) => {
@@ -31,9 +32,9 @@ const functions = {
   offer: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете написать нам предложение по почте: muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам Ваше предложение прямо сюда!`
+      text = `Отлично! Вы можете написать нам предложение по почте: uspanova.ay@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам Ваше предложение прямо сюда!`
     } else {
-      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы muratova.a@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.offer[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
+      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы uspanova.ay@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.offer[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
@@ -60,21 +61,12 @@ const functions = {
       parse_mode: 'HTML'
     })
   },
-  info: (bot, msg, lang) => {
-    let text = null
-    if (lang === 'rus') {
-      text = `Пожалуйста, введите наименование услуги`
-    } else {
-      text = ``
-    }
-    bot.sendMessage(msg.chat.id, text)
-  },
   communication: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете связаться с нами по почте muratova.a@minagri.gov.kz или написать оператору.\nВремя работы: 9:00 - 18:00`
+      text = `Отлично! Вы можете связаться с нами по почте uspanova.ay@minagri.gov.kz или написать оператору.\nВремя работы: 9:00 - 18:00`
     } else {
-      text = `Бәрекелді! Сіз бізбен muratova.a@minagri.gov.kz электронды пошта арқылы хабарласа аласыз немесе тікелей операторға жаза аласыз.\nЖұмыс уақыты: 9:00-18:00`
+      text = `Бәрекелді! Сіз бізбен uspanova.ay@minagri.gov.kz электронды пошта арқылы хабарласа аласыз немесе тікелей операторға жаза аласыз.\nЖұмыс уақыты: 9:00-18:00`
     }
 
     bot.sendMessage(msg.chat.id, text, {
@@ -89,9 +81,9 @@ const functions = {
   report: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете написать нам вашу жалобу по почте muratova.a@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам Вашу жалобу прямо сюда!`
+      text = `Отлично! Вы можете написать нам вашу жалобу по почте uspanova.ay@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам Вашу жалобу прямо сюда!`
     } else {
-      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы muratova.a@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.report[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
+      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы uspanova.ay@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.report[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
 
     bot.sendMessage(msg.chat.id, text, {
@@ -149,9 +141,17 @@ const functions = {
   HANDLER_OFFER: (bot, msg, lang) => {
     let admins = config.adminsID
     for (let i = 0; i < admins.length; i++) {
-      bot.sendMessage(admins[i], `<b>Предложение</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
-        parse_mode: "HTML"
-      })
+      if (msg.photo) {
+        bot.getFile(msg.photo[0].file_id).then(data => {
+            let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+            var photo = request(filePath)
+            bot.sendPhoto(admins[i], photo, { caption: `Предложение от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+          })
+      } else {
+        bot.sendMessage(admins[i], `<b>Предложение</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
+          parse_mode: "HTML"
+        })
+      }
     }
     let text = null
     if (lang === 'rus') {
@@ -170,9 +170,17 @@ const functions = {
   HANDLER_REPORT: (bot, msg, lang) => {
     let admins = config.adminsID
     for (let i = 0; i < admins.length; i++) {
-      bot.sendMessage(admins[i], `<b>Жалоба</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
-        parse_mode: "HTML"
-      })
+      if (msg.photo) {
+        bot.getFile(msg.photo[0].file_id).then(data => {
+            let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+            var photo = request(filePath)
+            bot.sendPhoto(admins[i], photo, { caption: `<b>Жалоба</b> от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+          })
+      } else {
+        bot.sendMessage(admins[i], `<b>Жалоба</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
+          parse_mode: "HTML"
+        })
+      }
     }
     let text = null
     if (lang === 'rus') {
@@ -190,10 +198,18 @@ const functions = {
   },
   HANDLER_COMMUNICATION: (bot, msg, lang) => {
     let admins = config.adminsID
-    for(let i = 0; i < admins.length; i++) {
-      bot.sendMessage(admins[i], `<b>Вопрос</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
-        parse_mode: "HTML"
-      })
+    for (let i = 0; i < admins.length; i++) {
+      if (msg.photo) {
+        bot.getFile(msg.photo[0].file_id).then(data => {
+            let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+            var photo = request(filePath)
+            bot.sendPhoto(admins[i], photo, { caption: `<b>Вопрос</b> от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+          })
+      } else {
+        bot.sendMessage(admins[i], `<b>Вопрос</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
+          parse_mode: "HTML"
+        })
+      }
     }
     let text = null
     if (lang === 'rus') {
@@ -212,31 +228,55 @@ const functions = {
   HANDLER_ADMIN_ANSWER: (bot, msg, data, lang) => {
     bot.sendMessage(data.forUser, msg.text)
   },
-  HANDLER_INFO: async function (bot, msg, lang) {
-    const filename = `/info_${lang}.xlsx`
-    const results = await converter(filename, msg)
-    if (results.length > 0) {
-      for (let i = 0; i < results.length; i++) {
-        if (results[i] !== undefined) {
-          bot.sendMessage(msg.chat.id, `<b>Возможно, Вас интересует данная услуга:</b> \n${results[i].title}\n ${results[i].values.map(item => item ? `\n${item}` : '')}`, {
-            parse_mode: "HTML",
-            reply_markup: {
-			  keyboard: kb[lang].main,
-			  resize_keyboard: true
-			},
-          })
-        }
-      }
+  info: function (bot, msg, lang) {
+    
+    let text = null
+    if (lang === 'rus') {
+      text = `Пожалуйста, выберите необходимую группу:`
     } else {
-      bot.sendMessage(msg.chat.id, `<b>К сожалению, таких услуг не найдено</b>`, {
-        parse_mode: "HTML",
-        reply_markup: {
-		  keyboard: kb[lang].main,
-		  resize_keyboard: true
-		},
-      })
+      text = ``
     }
-
+    bot.sendMessage(msg.chat.id, text, {
+      parse_mode: "HTML",
+      reply_markup: {
+        keyboard: kb.info_GROUPS[lang],
+        resize_keyboard: true
+      },
+    })
+  },
+  infoGroup: function (bot, msg, lang) {
+    const btns = []
+    kb.info_TITLES[lang][msg.text].forEach(item => {
+      btns.push([item.title])
+    })
+    let text = null
+    if (lang === 'rus') {
+      text = `Пожалуйста, выберите подходящий вопрос:`
+    } else {
+      text = ``
+    }
+    bot.sendMessage(msg.chat.id, text, {
+      parse_mode: "HTML",
+      reply_markup: {
+        keyboard: btns,
+        resize_keyboard: true
+      },
+    })
+  },
+  infoByTitle: function (bot, msg, lang, info) {
+    let text = null
+    if (lang === 'rus') {
+      text = `<b>Возможно, Вас интересует данная услуга:</b> \n${info.title}\n ${info.values.map(item => item ? `\n${item}` : '')}`
+    } else {
+      text = ``
+    }
+    bot.sendMessage(msg.chat.id, text, {
+      parse_mode: "HTML",
+      reply_markup: {
+        keyboard: kb[lang].main,
+        resize_keyboard: true
+      },
+    })
   }
 }
 

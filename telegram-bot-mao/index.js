@@ -2,6 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const config = require('./src/config')
 const functions = require('./src/func')
 const keyboard_btns = require('./src/keyboard-buttons')
+const kb = require('./src/keyboards')
 
 
 const bot = new TelegramBot(config.token, {
@@ -106,13 +107,17 @@ bot.on('message', msg => {
         break;
       
       case keyboard_btns.main[lang].info:
-        isWaitingforMessage.push({
-          userId: userId,
-          isWaiting: true,
-          waitingFor: 'info'
-        })
+        // isWaitingforMessage.push({
+        //   userId: userId,
+        //   isWaiting: true,
+        //   waitingFor: 'info'
+        // })
         functions.info(bot, msg, lang)
         break;
+      
+      // case kb.info_GROUPS:
+      //   functions.info(bot, msg, lang)
+      //   break;
 
       case keyboard_btns.main[lang].communication:
         functions.communication(bot, msg, lang)
@@ -155,6 +160,20 @@ bot.on('message', msg => {
 
 
       default:
+        kb.info_GROUPS[lang].forEach(item => {
+          if (item[0].indexOf(msg.text) >= 0) {
+            functions.infoGroup(bot, msg, lang)
+          }
+        })
+        let notSended = true
+        Object.keys(kb.info_TITLES[lang]).forEach(item => {
+         kb.info_TITLES[lang][item].forEach(title => {
+           if (title.title.indexOf(msg.text.slice(0, 125)) >= 0 && notSended) {
+             functions.infoByTitle(bot, msg, lang, title)
+             notSended = false
+           }
+          })
+        })
         break;
     }
   } else if (isWaiting.isWaiting){
@@ -166,9 +185,10 @@ bot.on('message', msg => {
       functions.HANDLER_COMMUNICATION(bot, msg, lang)
     } else if (isWaiting.waitingFor === 'answer') {
       functions.HANDLER_ADMIN_ANSWER(bot, msg, isWaiting, lang)
-    } else if (isWaiting.waitingFor === 'info') {
-      functions.HANDLER_INFO(bot, msg, lang)
-    }
+    } 
+    // else if (isWaiting.waitingFor === 'info') {
+    //   functions.HANDLER_INFO(bot, msg, lang)
+    // }
     isWaitingforMessage.splice(isWaitingforMessage.findIndex(item => item.userId === userId), 1)
   }
 })
