@@ -143,10 +143,16 @@ const functions = {
     for (let i = 0; i < admins.length; i++) {
       if (msg.photo) {
         bot.getFile(msg.photo[0].file_id).then(data => {
-            let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
-            var photo = request(filePath)
-            bot.sendPhoto(admins[i], photo, { caption: `Предложение от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
-          })
+          let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+          var photo = request(filePath)
+          bot.sendPhoto(admins[i], photo, { caption: `Предложение от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+        })
+      } else if(msg.video) {
+        bot.getFile(msg.video.file_id).then(data => {
+          let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+          var video = request(filePath)
+          bot.sendVideo(admins[i], video, { caption: `Предложение от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с видео.'}\n>>Ответить: /answer_${msg.chat.id}` });
+        })
       } else {
         bot.sendMessage(admins[i], `<b>Предложение</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
           parse_mode: "HTML"
@@ -174,9 +180,15 @@ const functions = {
         bot.getFile(msg.photo[0].file_id).then(data => {
             let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
             var photo = request(filePath)
-            bot.sendPhoto(admins[i], photo, { caption: `<b>Жалоба</b> от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+            bot.sendPhoto(admins[i], photo, { caption: `Жалоба от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
           })
-      } else {
+      } else if (msg.video) {
+        bot.getFile(msg.video.file_id).then(data => {
+          let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+          var video = request(filePath)
+          bot.sendVideo(admins[i], video, { caption: `Жалоба от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с видео.'}\n>>Ответить: /answer_${msg.chat.id}` });
+        })
+      }  else {
         bot.sendMessage(admins[i], `<b>Жалоба</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
           parse_mode: "HTML"
         })
@@ -203,9 +215,15 @@ const functions = {
         bot.getFile(msg.photo[0].file_id).then(data => {
             let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
             var photo = request(filePath)
-            bot.sendPhoto(admins[i], photo, { caption: `<b>Вопрос</b> от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
+            bot.sendPhoto(admins[i], photo, { caption: `Вопрос от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с фото.'}\n>>Ответить: /answer_${msg.chat.id}` });
           })
-      } else {
+      } else if (msg.video) {
+        bot.getFile(msg.video.file_id).then(data => {
+          let filePath = `https://api.telegram.org/file/bot${config.token}/${data.file_path}`
+          var video = request(filePath)
+          bot.sendVideo(admins[i], video, { caption: `Вопрос от пользователя ${msg.chat.first_name}:\n${msg.caption ? msg.caption : 'Без сообщения, с видео.'}\n>>Ответить: /answer_${msg.chat.id}` });
+        })
+      }  else {
         bot.sendMessage(admins[i], `<b>Вопрос</b> от пользователя ${msg.chat.first_name}:\n${msg.text}\n>>Ответить: /answer_${msg.chat.id}`, {
           parse_mode: "HTML"
         })
