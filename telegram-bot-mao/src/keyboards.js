@@ -5,9 +5,9 @@ module.exports = {
   info_TITLES: config.valuesByGroup,
   rus: {
     main: [
+      [btns.main.rus.info],
       [btns.main.rus.offer, btns.main.rus.report],
-      [btns.main.rus.communication],
-      [btns.main.rus.info, btns.main.rus.press]
+      [btns.main.rus.communication, btns.main.rus.press]
     ],
     offer: [
       [btns.offer.rus.toMessage],
@@ -27,9 +27,9 @@ module.exports = {
   },
   kz: {
     main: [
+      [btns.main.kz.info],
       [btns.main.kz.offer, btns.main.kz.report],
-      [btns.main.kz.communication],
-      [btns.main.kz.info, btns.main.kz.press]
+      [btns.main.kz.communication, btns.main.kz.press]
     ],
     offer: [
       [btns.offer.kz.toMessage],

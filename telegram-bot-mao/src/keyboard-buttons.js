@@ -1,54 +1,54 @@
 module.exports = {
   common: {
     rus: {
-      back: 'Вернуться в главное меню'
+      back: '\u2b05\ufe0f Вернуться в главное меню'
     },
     kz: {
-      back: 'Басты мәзірге оралу'
+      back: '\u2b05\ufe0f Басты мәзірге оралу'
     }
   },
   main: {
     rus: {
-      offer: 'Предложить',
-      report: 'Пожаловаться',
-      communication: 'Оперативная связь',
-      info: 'Справ. информация',
-      press: 'Связаться с пресс-службой'
+      offer: '\u270f\ufe0f Предложить',
+      report: '\ud83d\udce2 Пожаловаться',
+      communication: '\ud83d\udcf1 Оперативная связь',
+      info: '\ud83d\udcc3 Справ. информация',
+      press: '\ud83d\udcac Связаться с пресс-службой'
     },
     kz: {
-      offer: 'Ұсыныс жолдау',
-      report: 'Шағымдану',
-      communication: 'Жедел байланыс',
-      info: 'Анықтамалық ақпарат',
-      press: 'Связаться с пресс-службой'
+      offer: '\u270f\ufe0f Ұсыныс жолдау',
+      report: '\ud83d\udce2 Шағымдану',
+      communication: '\ud83d\udcf1 Жедел байланыс',
+      info: '\ud83d\udcc3 Анықтамалық ақпарат',
+      press: '\ud83d\udcac Связаться с пресс-службой'
     }
   },
   offer: {
     rus: {
-      toMessage: 'Написать предложение в чат'
+      toMessage: '\u2709\ufe0f Написать предложение в чат'
     },
     kz: {
-      toMessage: 'Ұсынысты чатта жазу'
+      toMessage: '\u2709\ufe0f Ұсынысты чатта жазу'
     }
   },
   report: {
     rus: {
-      toMessage: 'Написать жалобу в чат'
+      toMessage: '\u2709\ufe0f Написать жалобу в чат'
     },
     kz: {
-      toMessage: 'Шағымды чатта жазу'
+      toMessage: '\u2709\ufe0f Шағымды чатта жазу'
     }
   },
   communication: {
     rus: {
-      toMessage: 'Связаться с оператором в чате'
+      toMessage: '\ud83e\uddcf\u200d Связаться с оператором в чате'
     },
     kz: {
-      toMessage: 'Чат операторымен байланысу'
+      toMessage: '\ud83e\uddcf\u200d Чат операторымен байланысу'
     }
   },
   lang: {
-    rus: 'Русский',
-    kz: 'Казақша'
+    rus: '\ud83c\uddf7\ud83c\uddfa Русский',
+    kz: '\ud83c\uddf0\ud83c\uddff Казақша'
   }
 }

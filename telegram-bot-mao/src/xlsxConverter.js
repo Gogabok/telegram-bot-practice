@@ -16,7 +16,7 @@ const XLSXConverter = async function (filename) {
         title: cells[i][0],
         group: cells[i][3],
         groupExtra: cells[i][4] ? cells[i][4] : null,
-        values: values
+        values: values.join('\n\n')
       })
     }
   })
