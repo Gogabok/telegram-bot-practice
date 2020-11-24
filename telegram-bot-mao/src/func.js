@@ -32,9 +32,9 @@ const functions = {
   offer: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете написать нам предложение по почте: uspanova.ay@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам Ваше предложение прямо сюда!`
+      text = `Отлично! Вы можете написать нам предложение по почте: goluslugi@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.offer[lang].toMessage}" и отправить нам Ваше предложение прямо сюда!`
     } else {
-      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы uspanova.ay@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.offer[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
+      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы goluslugi@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.offer[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
@@ -64,9 +64,9 @@ const functions = {
   communication: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете связаться с нами по почте uspanova.ay@minagri.gov.kz или написать оператору.\nВремя работы: 9:00 - 18:00`
+      text = `Отлично! Вы можете связаться с нами по почте goluslugi@minagri.gov.kz или написать оператору.\nВремя работы: 9:00 - 18:00`
     } else {
-      text = `Бәрекелді! Сіз бізбен uspanova.ay@minagri.gov.kz электронды пошта арқылы хабарласа аласыз немесе тікелей операторға жаза аласыз.\nЖұмыс уақыты: 9:00-18:00`
+      text = `Бәрекелді! Сіз бізбен goluslugi@minagri.gov.kz электронды пошта арқылы хабарласа аласыз немесе тікелей операторға жаза аласыз.\nЖұмыс уақыты: 9:00-18:00`
     }
 
     bot.sendMessage(msg.chat.id, text, {
@@ -81,9 +81,9 @@ const functions = {
   report: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете написать нам вашу жалобу по почте uspanova.ay@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам Вашу жалобу прямо сюда!`
+      text = `Отлично! Вы можете написать нам вашу жалобу по почте goluslugi@minagri.gov.kz. Или нажать на кнопку "${keyboard_btns.report[lang].toMessage}" ниже и отправить нам Вашу жалобу прямо сюда!`
     } else {
-      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы uspanova.ay@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.report[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
+      text = `Өте жақсы! Сіз ұсынысыңызды бізге электронды пошта арқылы goluslugi@minagri.gov.kz мекен-жайына жолдай аласыз. Немесе "${keyboard_btns.report[lang].toMessage}" сілтемесін басып,  бізге өз ұсынысыңызды дәл осында жіберіңіз! `
     }
 
     bot.sendMessage(msg.chat.id, text, {
