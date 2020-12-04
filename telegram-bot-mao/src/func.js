@@ -48,9 +48,9 @@ const functions = {
   press: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:30`
+      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:00`
     } else {
-      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:30`
+      text = `Бәрекелді! Сіз бізбен \nminagripress@gmail.com электронды пошта арқылы хабарласа аласыз. \nЖұмыс уақыты: 9:00-18:00`
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
@@ -247,12 +247,11 @@ const functions = {
     bot.sendMessage(data.forUser, msg.text)
   },
   info: function (bot, msg, lang) {
-    
     let text = null
     if (lang === 'rus') {
       text = `Пожалуйста, выберите необходимую группу:`
     } else {
-      text = ``
+      text = `Қажетті топты таңдаңыз:`
     }
     bot.sendMessage(msg.chat.id, text, {
       parse_mode: "HTML",
@@ -271,7 +270,7 @@ const functions = {
     if (lang === 'rus') {
       text = `Пожалуйста, выберите подходящий вопрос:`
     } else {
-      text = ``
+      text = `Тиісті сұрақты таңдаңыз:`
     }
     bot.sendMessage(msg.chat.id, text, {
       parse_mode: "HTML",
@@ -286,7 +285,7 @@ const functions = {
     if (lang === 'rus') {
       text = `<b>Возможно, Вас интересует данная услуга:</b> \n${info.title}\n\n${info.values}`
     } else {
-      text = ``
+      text = `<b>Сізді бұл қызмет қызықтыруы мүмкін:</b> \n${info.title}\n\n${info.values}`
     }
     bot.sendMessage(msg.chat.id, text, {
       parse_mode: "HTML",

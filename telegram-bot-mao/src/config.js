@@ -7,7 +7,7 @@ module.exports = {
   infoKeyboardsGroups: {},
   valuesByGroup: {},
   loadingInfoConfig: async function () {
-    let files = ['rus']
+    let files = ['rus', 'kz']
     for(let i = 0; i < files.length; i++) {
       const filename = `/info_${files[i]}.xlsx`
       const results = await converter(filename)
@@ -53,7 +53,44 @@ module.exports = {
         {
           value: 'субсидирование в АПК',
           emodji: '\ud83d\udcb0'
-        }
+        },
+
+        {
+          value: 'ауылшаруашылық техника',
+          emodji: '\ud83d\ude9a'
+        },
+        {
+          value: 'өсімдік шаруашылығы',
+          emodji: '\ud83c\udf31'
+        },
+        {
+          value: 'өсімдіктерді қорғау',
+          emodji: '\ud83c\udf40'
+        },
+        {
+          value: 'ветеринария',
+          emodji: '\ud83d\udc04'
+        },
+        {
+          value: 'өсімдіктер карантині',
+          emodji: '\ud83c\udf3f'
+        },
+        {
+          value: 'мал шаруашылығы',
+          emodji: '\ud83d\udc0f'
+        },
+        {
+          value: 'лицензиялау',
+          emodji: '\ud83d\udccb'
+        },
+        {
+          value: 'жер қатынастары',
+          emodji: '\ud83c\udfe1'
+        },
+        {
+          value: 'АӨК-ні  субсидиялау',
+          emodji: '\ud83d\udcb0'
+        },
       ]
       const keyboardGroups = []
       groups.forEach(item => keyboardGroups.push([`${groupsEmoodjies.find(emodji => emodji.value.trim() === item.trim()).emodji} ` + item]))
