@@ -125,7 +125,7 @@ const functions = {
     if (lang === 'rus') {
       text = 'Пожалуйста, введите Вашу жалобу:'
     } else {
-      text = `Сіздің шағым енгізіңіз:`
+      text = `Шағымыңызды енгізіңіз:`
     }
     bot.sendMessage(msg.chat.id, text)
   },

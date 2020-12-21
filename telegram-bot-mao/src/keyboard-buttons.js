@@ -20,7 +20,7 @@ module.exports = {
       report: '\ud83d\udce2 Шағымдану',
       communication: '\ud83d\udcf1 Жедел байланыс',
       info: '\ud83d\udcc3 Анықтамалық ақпарат',
-      press: '\ud83d\udcac Связаться с пресс-службой'
+      press: '\ud83d\udcac Баспасөз қызметімен байланысу'
     }
   },
   offer: {
@@ -49,6 +49,6 @@ module.exports = {
   },
   lang: {
     rus: '\ud83c\uddf7\ud83c\uddfa Русский',
-    kz: '\ud83c\uddf0\ud83c\uddff Казақша'
+    kz: '\ud83c\uddf0\ud83c\uddff Қазақша'
   }
 }

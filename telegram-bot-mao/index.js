@@ -69,7 +69,7 @@ bot.on('message', msg => {
   let isWaiting = isWaitingforMessage.find(item => item.userId === userId)
   let userOptions = config.userOptionsData.find(i => i.userId == userId)
   let lang = userOptions ? userOptions.lang : null
-  if (lang === null && msg.text !== 'Русский' && msg.text !== 'Казақша') {
+  if (lang === null && msg.text !== 'Русский' && msg.text !== 'Қазақша') {
     functions.start(bot, msg)
   }
   if (!isWaiting) {
