@@ -48,7 +48,7 @@ module.exports = {
     }
   },
   lang: {
-    rus: '\ud83c\uddf7\ud83c\uddfa Русский',
-    kz: '\ud83c\uddf0\ud83c\uddff Қазақша'
+    rus: 'Русский',
+    kz: 'Қазақша'
   }
 }

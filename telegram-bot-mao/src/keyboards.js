@@ -48,6 +48,6 @@ module.exports = {
     ],
   },
   lang: [
-    [btns.lang.rus, btns.lang.kz]
+    [btns.lang.kz, btns.lang.rus]
   ]
 }

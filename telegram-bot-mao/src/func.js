@@ -48,9 +48,9 @@ const functions = {
   press: (bot, msg, lang) => {
     let text = null
     if (lang === 'rus') {
-      text = `Отлично! Вы можете связаться с нами по почте: \nminagripress@gmail.com \nВремя работы: 9:00 - 18:00`
+      text = `Отлично! Вы можете связаться с нами по почте: \nMinagripress@mail.kz \nВремя работы: 9:00 - 18:00`
     } else {
-      text = `Бәрекелді! Сіз бізбен \nminagripress@gmail.com электронды пошта арқылы хабарласа аласыз. \nЖұмыс уақыты: 9:00-18:00`
+      text = `Бәрекелді! Сіз бізбен \nMinagripress@mail.kz электронды пошта арқылы хабарласа аласыз. \nЖұмыс уақыты: 9:00-18:00`
     }
     bot.sendMessage(msg.chat.id, text, {
       reply_markup: {
