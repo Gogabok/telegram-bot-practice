@@ -17,7 +17,7 @@ const functions = {
   langChoose(bot, msg, lang) {
     let text = null
     if (lang === 'rus') {
-      text = `Здравствуйте, ${msg.chat.first_name}. Я бот Министерства Сельского хозяйства Республики Казахстан, который поможет Вам получить информацию по государственным услугам, касающиеся вопросов Министерства Сельского хозяйства Республики Казахстан.`
+      text = `Здравствуйте, ${msg.chat.first_name}. Я бот Министерства сельского хозяйства Республики Казахстан, который поможет Вам получить информацию по государственным услугам, отнесенным к компетенции Министерства сельского хозяйства Республики Казахстан.`
     } else {
       text = `Сәлеметсіз бе, ${msg.chat.first_name}. Мен Сізге көмек көрсететін ҚР Ауыл шаруашылығы министрлігінің боты. Қажетті мәселеңізді таңдауыңызды өтінем:`
     }
@@ -256,7 +256,7 @@ const functions = {
     bot.sendMessage(msg.chat.id, text, {
       parse_mode: "HTML",
       reply_markup: {
-        keyboard: kb.info_GROUPS[lang],
+        keyboard: [...kb.info_GROUPS[lang], [keyboard_btns.common[lang].back]],
         resize_keyboard: true
       },
     })
@@ -266,6 +266,7 @@ const functions = {
     kb.info_TITLES[lang][msg.text].forEach(item => {
       btns.push([item.title])
     })
+    btns.push([keyboard_btns.common[lang].back])
     let text = null
     if (lang === 'rus') {
       text = `Пожалуйста, выберите подходящий вопрос:`
